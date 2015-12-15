@@ -11,7 +11,7 @@ services:
             - %sirian.sphinx.connections%
             - %sirian.sphinx.default_connection%
         calls:
-            - ['setContainer', [@service_container]]
+            - ['setContainer', ["@service_container"]]
 
     sirian.sphinx.query_logger:
         class: %sirian.sphinx.query_logger.class%
