@@ -1,5 +1,5 @@
 {
-    "name": "sirian/symfony-sphinx-bundle",
+    "name": "wucdbm/symfony-sphinx-bundle",
     "require": {
     },
     "autoload": {
