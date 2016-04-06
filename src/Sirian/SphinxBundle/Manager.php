@@ -4,22 +4,24 @@ namespace Sirian\SphinxBundle;
 
 use Sirian\SphinxBundle\SphinxQL\Connection;
 use Sirian\SphinxBundle\SphinxQL\QueryBuilder;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class Manager extends ContainerAware
-{
+class Manager implements ContainerAwareInterface {
+
+    use ContainerAwareTrait;
+
     protected $connections = array();
     protected $defaultConnection = null;
 
-    public function __construct($connections = array(), $defaultConnection)
-    {
+    public function __construct($connections = array(), $defaultConnection) {
         $this->connections = $connections;
         $this->defaultConnection = $defaultConnection;
     }
 
-    public function createQueryBuilder($connectionName = null)
-    {
+    public function createQueryBuilder($connectionName = null) {
         $connection = $this->getConnection($connectionName);
+
         return new QueryBuilder($connection);
     }
 
@@ -28,8 +30,7 @@ class Manager extends ContainerAware
      * @return Connection
      * @throws \RuntimeException
      */
-    public function getConnection($name = null)
-    {
+    public function getConnection($name = null) {
         if (null === $name) {
             $name = $this->defaultConnection;
         }
